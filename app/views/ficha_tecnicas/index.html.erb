@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario con banner y pie de página</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      margin-top: 20px;
+    }
+
+    .formulario {
+      width: 400px;
+      padding: 20px;
+      border: 2px solid #ccc;
+      background-color: #f9f9f9;
+      margin: 0 auto;
+    }
+
+    .formulario h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .formulario h3 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .formulario form {
+      width: 100%;
+    }
+
+    .formulario h4 {
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .formulario label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    .formulario input[type="text"],
+    .formulario input[type="password"],
+    .formulario textarea,
+    .formulario select {
+      width: 100%;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .formulario input[type="file"] {
+      margin-top: 10px;
+    }
+
+    .formulario input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .formulario input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .footer-brand {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .footer-brand img {
+      max-width: 100px;
+    }
+
+    .banner-brand {
+      padding: 10px;
+      text-align: center;
+      top: 10px;
+      left: 10px;
+      z-index: 9999;
+    }
+
+    .banner-brand img {
+      width: 200px;
+    }
+
+    .notice-container {
+      background-color: #ffffcc;
+      border: 1px solid #ddddaa;
+      color: #333333;
+      padding: 10px;
+      margin-top: 20px;
+      text-align: center;
+      border: 0px solid #fff;
+      padding-top: 10px;
+      padding: 70px 0 200px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="banner-brand">
+    <a href="https://www.gba.gob.ar/">
+      <img src="https://gba.gob.ar/imagenes/logo_gba_footer_blanco.svg" alt="logo buenos aires provincia">
+    </a>
+  </div>
+</div>
+
+<div class="formulario">
+  <h1>CONCURSO MYDECK</h1>
+  <h3>CONCURSO DE CORTOMETRAJES "MUJERES Y DIVERSIDADES EN CONSTRUCCIÓN"</h3>
+
+  <%= form_with(model: @ficha_tecnica, url: ficha_tecnicas_path, local: true, method: :post, multipart: true) do |ficha_tecnica_form| %>
+
+    <h4>Información General</h4>
+    <div>
+      <%= ficha_tecnica_form.label :categoria_id, "Categoría:" %>
+      <%= ficha_tecnica_form.select :categoria_id, options_for_select(['Cortometraje', 'Ficción', 'Animación']), prompt: "Seleccionar categoría" %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :titulo, "Título:" %>
+      <%= ficha_tecnica_form.text_field :titulo %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :link, "Link:" %>
+      <%= ficha_tecnica_form.text_field :link %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :contraseña, "Contraseña:" %>
+      <%= ficha_tecnica_form.password_field :contraseña %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :imagen1, "Afiche:" %>
+      <%= ficha_tecnica_form.file_field :imagen1 %>
+    </div>
+
+    <h4>Información Técnica</h4>
+    <div>
+      <%= ficha_tecnica_form.label :pais, "País:" %>
+      <%= ficha_tecnica_form.text_field :pais %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :year, "Año:" %>
+      <%= ficha_tecnica_form.text_field :year %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :duracion, "Duración en minutos:" %>
+      <%= ficha_tecnica_form.text_field :duracion %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :elenco, "Elenco:" %>
+      <%= ficha_tecnica_form.text_area :elenco, rows: 5 %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :etecnicoc, "Equipo técnico completo:" %>
+      <%= ficha_tecnica_form.text_area :etecnicoc, rows: 5 %>
+    </div>
+
+    <h4>¡Subí tres fotos de tu proyecto!</h4>
+    <div>
+      <%= ficha_tecnica_form.label :imagen2, "Imagen 1:" %>
+      <%= ficha_tecnica_form.file_field :imagen1 %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :imagen2, "Imagen 2:" %>
+      <%= ficha_tecnica_form.file_field :imagen2 %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :imagen3, "Imagen 3:" %>
+      <%= ficha_tecnica_form.file_field :imagen3 %>
+    </div>
+
+    <h4>Motivaciones</h4>
+    <div>
+      <%= ficha_tecnica_form.label :motivacion_direccion, "Motivación Dirección:" %>
+      <%= ficha_tecnica_form.text_area :motivacion_direccion %>
+    </div>
+    <div>
+      <%= ficha_tecnica_form.label :motivacion_produccion, "Motivación Producción:" %>
+      <%= ficha_tecnica_form.text_area :motivacion_produccion, rows: 5 %>
+    </div>
+
+    <%= ficha_tecnica_form.submit "Enviar" %>
+  <% end %>
+</div>
+
+<div class="notice-container">
+  <% if notice %>
+    <p><%= notice %></p>
+  <% end %>
+</div>
+
+<div class="footer-brand">
+  <img class="logo_footer_provincia" src="https://www.gba.gob.ar/imagenes/social/provincia_icon_Footer.png" alt="ingresar a Buenos Aires Provincia">
+</div>
+
+</body>
+</html>
